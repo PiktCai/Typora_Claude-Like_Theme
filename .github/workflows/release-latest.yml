@@ -1,44 +1,38 @@
-name: Release Latest Theme Files
+name: Release Theme Package
 
 on:
   push:
-    branches:
-      - master
-    paths:
-      - claude-like.css
-      - claude-like-dark.css
-      - .github/workflows/release-latest.yml
+    tags:
+      - "v*"
 
 permissions:
   contents: write
 
 jobs:
-  release-latest:
+  release:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Publish latest release
+      - name: Build zip package
+        run: zip -j Typora_Claude-Like_Theme.zip claude-like.css claude-like-dark.css
+
+      - name: Publish release
         uses: ncipollo/release-action@v1
         with:
-          allowUpdates: true
           artifactErrorsFailBuild: true
-          artifacts: "claude-like.css,claude-like-dark.css"
+          artifacts: "claude-like.css,claude-like-dark.css,Typora_Claude-Like_Theme.zip"
           body: |
-            Auto-updated from the latest commit on `master`.
+            Release for `${{ github.ref_name }}`.
 
             Included files:
             - `claude-like.css`
             - `claude-like-dark.css`
-          commit: ${{ github.sha }}
+            - `Typora_Claude-Like_Theme.zip`
           generateReleaseNotes: true
           makeLatest: true
-          name: Latest
-          omitBodyDuringUpdate: true
-          omitNameDuringUpdate: true
+          name: ${{ github.ref_name }}
           prerelease: false
-          removeArtifacts: true
-          replacesArtifacts: true
-          tag: latest
+          tag: ${{ github.ref_name }}
