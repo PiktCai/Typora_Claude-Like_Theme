@@ -458,6 +458,22 @@ tt {
 .md-task-list-item > input {
     margin-left: -1.3em;
     accent-color: var(--accent-color);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.md-task-list-item > input:hover {
+    transform: scale(1.1);
+}
+
+.md-task-list-item.task-list-done {
+    opacity: 0.6;
+    color: var(--code-muted-color);
+    transition: all 0.3s ease;
+}
+
+.md-task-list-item.task-list-done > p {
+    text-decoration: line-through;
 }
 
 @media print {
