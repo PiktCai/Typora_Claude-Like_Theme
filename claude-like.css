@@ -238,11 +238,11 @@ ol:last-child {
 }
 
 blockquote {
-    border-left: 2px solid var(--quote-border-color);
-    background-color: var(--quote-bg-color);
-    padding: 0.55rem 1rem;
-    color: var(--quote-text-color);
-    border-radius: 10px;
+    border-left: 3px solid #d0d0d0;
+    background-color: transparent;
+    padding: 0.35em 0 0.35em 1.15em;
+    color: var(--text-color);
+    font-family: var(--font-body);
 }
 
 blockquote blockquote {
